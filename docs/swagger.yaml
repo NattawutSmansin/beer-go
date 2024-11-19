@@ -1,0 +1,161 @@
+basePath: /api/v1
+definitions:
+  models.CreateBeer:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      image_files:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+    required:
+    - category_id
+    - description
+    - image_files
+    - name
+    type: object
+  models.UpdateBeer:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      image_files:
+        type: string
+      name:
+        type: string
+    required:
+    - category_id
+    - description
+    - image_files
+    - name
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: This is a sample Beer API
+  title: Beer API Title
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      responses: {}
+      summary: แสดงข้อความต้อนรับ
+      tags:
+      - Welcome to My Beer
+  /beer:
+    get:
+      consumes:
+      - application/json
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      parameters:
+      - description: Beer Name
+        in: query
+        name: name
+        type: string
+      - description: 'Page (optional, default: 1)'
+        in: query
+        name: page
+        type: integer
+      - description: 'Limit (optional, default: 10)'
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: เรียกข้อมูล Beer ทั้งหมด
+      tags:
+      - Beer
+    post:
+      consumes:
+      - application/json
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      parameters:
+      - description: Beer Data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBeer'
+      produces:
+      - application/json
+      responses: {}
+      summary: เพิ่มข้อมูล Beer
+      tags:
+      - Beer
+  /beer/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      parameters:
+      - description: Beer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: ลบข้อมูล Beer
+      tags:
+      - Beer
+    get:
+      consumes:
+      - application/json
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      parameters:
+      - description: Beer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: เรียกข้อมูล Beer ราย item
+      tags:
+      - Beer
+    put:
+      consumes:
+      - application/json
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      parameters:
+      - description: Beer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Beer Data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateBeer'
+      produces:
+      - application/json
+      responses: {}
+      summary: อัปเดตข้อมูล Beer
+      tags:
+      - Beer
+  /upload:
+    post:
+      description: ตัวอย่างการใช้งาน API เบื้องต้น
+      parameters:
+      - description: ไฟล์ที่ต้องการอัปโหลด
+        in: formData
+        name: file
+        type: file
+      responses: {}
+      summary: อัปโหลดไฟล์
+      tags:
+      - Upload
+swagger: "2.0"
